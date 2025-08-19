@@ -143,7 +143,7 @@ Swagger is integrated to make it easier to explore and test the API.
 - Once the app is running, visit:
 
 ```
-http://localhost:3000/api/docs
+http://localhost:3000/docs
 ```
 
 - You’ll see an interactive API documentation where you can:
