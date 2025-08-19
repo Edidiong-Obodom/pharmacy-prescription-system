@@ -1,3 +1,4 @@
+````markdown
 # Pharmacy Prescription System
 
 A simplified pharmacy prescription system built with NestJS, PostgreSQL, and Sequelize.
@@ -26,12 +27,13 @@ npm install -g @nestjs/cli
 # Generate NestJS application structure
 nest new . --skip-git --package-manager npm
 ```
+````
 
 ### 2. Install Dependencies
 
 ```bash
 # Install main dependencies
-npm install @nestjs/sequelize @nestjs/config @nestjs/jwt @nestjs/passport sequelize sequelize-typescript pg pg-hstore bcryptjs passport passport-jwt passport-local class-transformer class-validator
+npm install @nestjs/sequelize @nestjs/config @nestjs/jwt @nestjs/passport sequelize sequelize-typescript pg pg-hstore bcryptjs passport passport-jwt passport-local class-transformer class-validator @nestjs/swagger swagger-ui-express
 
 # Install dev dependencies
 npm install --save-dev @types/bcryptjs @types/passport-jwt @types/passport-local @types/pg @types/sequelize
@@ -64,6 +66,7 @@ cp .env.example .env
 ```
 
 Update your `.env` file:
+
 ```env
 DB_HOST=localhost
 DB_PORT=5432
@@ -131,6 +134,25 @@ npm run start:prod
 
 The application will be available at `http://localhost:3000`
 
+---
+
+## API Documentation (Swagger)
+
+Swagger is integrated to make it easier to explore and test the API.
+
+- Once the app is running, visit:
+
+```
+http://localhost:3000/api/docs
+```
+
+- You’ll see an interactive API documentation where you can:
+  - Explore available endpoints
+  - Test requests directly in the browser
+  - See request/response schemas
+
+---
+
 ### 7. Create Initial Data
 
 First, create a doctor account by making a POST request to `/doctors`:
@@ -182,30 +204,39 @@ curl -X POST http://localhost:3000/auth/doctor/login \
 ```
 
 Use the returned `access_token` in the Authorization header for protected routes:
+
 ```
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ```
 
+---
+
 ## API Endpoints
 
 ### Authentication
-- `POST /auth/login` - Login as a doctor
+
+- `POST /auth/patient/login` - Login as a patient
+- `POST /auth/doctor/login` - Login as a doctor
 
 ### Doctors
+
 - `POST /doctors` - Register a new doctor (public)
 - `GET /doctors` - Get all doctors (public)
 
 ### Patients (Protected - requires JWT)
+
 - `POST /patients` - Create a new patient
 - `GET /patients` - Get all patients
 - `GET /patients?search=query` - Search patients by name or email
 - `GET /patients/:id` - Get patient by ID
 
+---
+
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Database Connection Error**: 
+1. **Database Connection Error**:
    - Make sure PostgreSQL is running
    - Verify database credentials in `.env`
    - Ensure the database exists
